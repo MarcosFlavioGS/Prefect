@@ -1,3 +1,9 @@
+(* opening modules *)
+open New_project.CreateProject;;
+open Generate.GenerateStruct;;
+open Build_project.BuildProject;;
+open Run_project.RunProject;;
+
 (* Checks if there are arguments *)
 let check_args (): string list =
   if Array.length Sys.argv < 2 then
@@ -10,14 +16,14 @@ let () =
   let argv: string list = check_args () in
   let exec_commands (args: string list) (_len: int) =
     match args with
-    | ("new" | "n") :: _ -> print_endline "New project !"
-    | ("generate" | "g") :: _ -> print_endline "Generate especific project structure!"
-    | ("build" | "b") :: _ -> print_endline "Build project !"
-    | ("run" | "r") :: _ -> print_endline "Run project !"
+    | ("new" | "n") :: arg -> create_project arg
+    | ("generate" | "g") :: arg -> generate arg
+    | ("build" | "b") :: arg -> build_project arg
+    | ("run" | "r") :: arg -> run_project arg
     | _  -> failwith "Invalid_argument..."
   in
   match argv with
   | [] -> assert false
-  | _ :: rest -> let args = rest in
+  | _ :: rest -> let args: string list = rest in
 
   exec_commands args (List.length args);
