@@ -1,4 +1,5 @@
 (** generate interface *)
-module Generate : sig
+module GenerateStruct : sig
+  (** Generate all especific structure *)
   val generate : string list -> unit
 end
