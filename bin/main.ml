@@ -1,9 +1,23 @@
-let check_args () =
+(* Checks if there are arguments *)
+let check_args (): string list =
   if Array.length Sys.argv < 2 then
     (print_endline "Please provide one or more arguments..."; exit 1)
   else
     Array.to_list Sys.argv
 
+(* Entrypoint *)
+let () =
+  let argv: string list = check_args () in
+  let exec_commands (args: string list) (_len: int) =
+    match args with
+    | ("new" | "n") :: _ -> print_endline "New project !"
+    | ("generate" | "g") :: _ -> print_endline "Generate especific project structure!"
+    | ("build" | "b") :: _ -> print_endline "Build project !"
+    | ("run" | "r") :: _ -> print_endline "Run project !"
+    | _  -> failwith "Invalid_argument..."
+  in
+  match argv with
+  | [] -> assert false
+  | _ :: rest -> let args = rest in
 
-let () = let args = check_args () in
-  Printf.printf "%s\n" (String.concat ", " args)
+  exec_commands args (List.length args);
