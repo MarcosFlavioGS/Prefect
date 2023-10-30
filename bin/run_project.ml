@@ -1,5 +1,6 @@
 (** Run Project module *)
 module RunProject = struct
-  let run_project (_args: string list) =
-    print_endline "Run Project !"
+  let run_project = function
+    | [] -> print_endline "Run Project !"
+    | arg :: _ -> Printf.printf "Argument %s is invalid\n" arg
 end

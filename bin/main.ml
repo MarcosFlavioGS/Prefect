@@ -14,16 +14,11 @@ let check_args (): string list =
 (* Entrypoint *)
 let () =
   let argv: string list = check_args () in
-  let exec_commands (args: string list) (_len: int) =
-    match args with
-    | ("new" | "n") :: arg -> create_project arg
-    | ("generate" | "g") :: arg -> generate arg
-    | ("build" | "b") :: arg -> build_project arg
-    | ("run" | "r") :: arg -> run_project arg
+  let exec_commands (_len: int) = function
+    | _ :: ("new" | "n") :: args -> create_project args
+    | _ :: ("generate" | "g") :: args -> generate args
+    | _ :: ("build" | "b") :: args -> build_project args
+    | _ :: ("run" | "r") :: args -> run_project args
     | _  -> failwith "Invalid_argument..."
   in
-  match argv with
-  | [] -> assert false
-  | _ :: rest -> let args: string list = rest in
-
-  exec_commands args (List.length args);
+  exec_commands (List.length argv) argv;
