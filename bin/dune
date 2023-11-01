@@ -1,4 +1,4 @@
 (executable
  (public_name prefect)
  (name main)
- (libraries prefect))
+ (libraries prefect unix))
