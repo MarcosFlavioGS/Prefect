@@ -1,5 +1,31 @@
 (** Module tp create a new project *)
 module CreateProject = struct
+  let return_string (name: string) (file: string): string =
+    match String.get file (String.length file - 1) with
+      | 'c' ->
+        (
+          "#include \"../include/" ^ name ^ ".h\""
+          ^ "\n\n"
+          ^ "int main(void) {"
+          ^ "\n"
+          ^ "    printf(\"Hello, Prefect !\");"
+          ^ "\n"
+          ^ "    return (0);"
+          ^ "\n}"
+        );
+      | 'h' -> (
+          "#ifndef "
+          ^ (String.uppercase_ascii name) ^ "_H"
+          ^ "\n"
+          ^ "# define "
+          ^ (String.uppercase_ascii name) ^ "_H"
+          ^ "\n"
+          ^ "# include <stdio.h>"
+          ^ "\n"
+          ^ "#endif"
+        );
+      | _ -> ("Hello\n")
+
   let create_structure (name: string) =
       let directories: string list = ["src"; "include"; "test"; "bin"] in
       let create_dir (dir_name: string) =
@@ -29,7 +55,7 @@ module CreateProject = struct
     let files: string list = ["include/" ^ name ^ ".h"; "src/main.c"] in
     let create (name: string) (file: string) =
       let oc = open_out (name ^ "/" ^ file) in
-      output_string oc "Hello\n";
+      output_string oc (return_string name file);
       close_out oc
     in
     let rec create_files' (name: string) = function
