@@ -1,8 +1,8 @@
 (* opening modules *)
-open New_project.CreateProject;;
-open Generate.GenerateStruct;;
-open Build_project.BuildProject;;
-open Run_project.RunProject;;
+module New = Prefect.New_project.CreateProject;;
+module Gen = Prefect.Generate.GenerateStruct;;
+module Build = Prefect.Build_project.BuildProject;;
+module Run = Prefect.Run_project.RunProject;;
 
 (* Checks if there are arguments *)
 let check_args (): string list =
@@ -15,10 +15,10 @@ let check_args (): string list =
 let () =
   let argv: string list = check_args () in
   let exec_commands (_len: int) = function
-    | _ :: ("new" | "n") :: args -> create_project args
-    | _ :: ("generate" | "g") :: args -> generate args
-    | _ :: ("build" | "b") :: args -> build_project args
-    | _ :: ("run" | "r") :: args -> run_project args
+    | _ :: ("new" | "n") :: args -> New.create_project args
+    | _ :: ("generate" | "g") :: args -> Gen.generate args
+    | _ :: ("build" | "b") :: args -> Build.build_project args
+    | _ :: ("run" | "r") :: args -> Run.run_project args
     | _  -> failwith "Invalid_argument..."
   in
   exec_commands (List.length argv) argv;

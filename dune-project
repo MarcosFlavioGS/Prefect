@@ -7,9 +7,9 @@
 (source
  (github username/reponame))
 
-(authors "Author Name")
+(authors "Marcos Flavio")
 
-(maintainers "Maintainer Name")
+(maintainers "Marcos Flavio")
 
 (license LICENSE)
 
@@ -17,8 +17,8 @@
 
 (package
  (name prefect)
- (synopsis "A short synopsis")
- (description "A longer description")
+ (synopsis "A C package manager and build system")
+ (description "This a new C package manager and build system for C without having to use makefile")
  (depends ocaml dune)
  (tags
   (topics "to describe" your project)))

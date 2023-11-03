@@ -1,2 +1,3 @@
 (library
- (name prefect))
+ (name prefect)
+ (libraries unix))
