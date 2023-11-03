@@ -72,6 +72,8 @@ module CreateProject = struct
     | [project_name] ->
       create_structure (project_name);
       create_files (project_name);
+      (* TODO: Create config files to set project root, project name and dependencies *)
+      (* TODO: Initiate git repository in project dir *)
       Printf.printf "Created a new project named %s\n" project_name
     | _ -> print_endline "Nothing to do"
 end
