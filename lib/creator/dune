@@ -1,3 +1,5 @@
 (library
 (name creator)
-(libraries unix))
+(libraries
+  unix
+  yojson))

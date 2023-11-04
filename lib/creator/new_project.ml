@@ -26,7 +26,12 @@ module CreateProject = struct
       build_struct name directories
 
   let create_files (name: string) =
-    let files: string list = ["include/" ^ name ^ ".h"; "src/main.c"] in
+    let files: string list = [
+      "include/" ^ name ^ ".h";
+      "src/main.c";
+      "prefect.json"
+    ]
+    in
     let return_string (name: string) (file: string): string =
       match String.get file (String.length file - 1) with
         | 'c' ->
@@ -51,7 +56,11 @@ module CreateProject = struct
             ^ "\n"
             ^ "#endif"
           );
-        | _ -> ("Hello\n")
+        | _ -> (
+            "{\n"
+            ^ "  \"name\": " ^ "\"" ^ name ^ "\"" ^ "\n"
+            ^ "}"
+          )
     in
     let create (name: string) (file: string) =
       let oc = open_out (name ^ "/" ^ file) in
@@ -98,7 +107,6 @@ module CreateProject = struct
       create_structure (project_name);
       create_files (project_name);
       init_git project_name;
-      (* TODO: Create config file *)
       Printf.printf "Created a new project named %s\n" project_name
     | _ -> print_endline "Nothing to do"
 end
