@@ -68,12 +68,37 @@ module CreateProject = struct
 
     create_files' name files
 
+  let init_git (project_name: string) =
+    let git_commands project_name =
+      try
+        Sys.command (
+          "git init " ^ project_name
+          ^ ";"
+          ^ "cd " ^ project_name
+          ^ ";"
+          ^ "git add ."
+          ^ ";"
+          ^ "git commit -m \"Initial commit\""
+          ^ ";"
+          ^ "cd .."
+        )
+      with
+      | Failure msg -> Printf.printf "\nFailed to create git with: %s\n" msg; 1
+      | _ -> 0
+    in
+    let result = git_commands project_name in
+
+    if result = 0 then
+      print_endline "Git repository created !"
+    else
+      Printf.printf "Failed to create git repository with error: %d" result
+
   let create_project = function
     | [project_name] ->
       create_structure (project_name);
       create_files (project_name);
-      (* TODO: Create config files to set project root, project name and dependencies *)
-      (* TODO: Initiate git repository in project dir *)
+      init_git project_name;
+      (* TODO: Create config file *)
       Printf.printf "Created a new project named %s\n" project_name
     | _ -> print_endline "Nothing to do"
 end

@@ -1,4 +1,10 @@
 (executable
  (public_name prefect)
  (name main)
- (libraries prefect))
+ (modules main)
+ (libraries
+   prefect
+   creator
+   generator
+   builder
+   runner))
