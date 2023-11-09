@@ -1,7 +1,15 @@
 (** Module tp create a new project *)
 module CreateProject = struct
-  let create_structure (name: string) =
-      let directories: string list = ["src"; "include"; "test"; "bin"] in
+  open Unix
+  let create_C_structure (name: string): unit =
+      let directories: string list = [
+        "src";
+        "obj";
+        "include";
+        "test";
+        "bin"
+      ]
+      in
       let create_dir (dir_name: string) =
         let mode = 0o755 in
         try
@@ -25,11 +33,11 @@ module CreateProject = struct
       create_dir name;
       build_struct name directories
 
-  let create_files (name: string) =
+  let create_C_files (name: string): unit =
     let files: string list = [
       "include/" ^ name ^ ".h";
       "src/main.c";
-      "prefect.json"
+      "Prefect.toml"
     ]
     in
     let return_string (name: string) (file: string): string =
@@ -56,11 +64,22 @@ module CreateProject = struct
             ^ "\n"
             ^ "#endif"
           );
-        | _ -> (
-            "{\n"
-            ^ "  \"name\": " ^ "\"" ^ name ^ "\"" ^ "\n"
-            ^ "}"
-          )
+        | 'l' ->
+          let result = (Unix.open_process_in "pwd") in
+
+          (
+            "[project]\n"
+            ^ "name: " ^ "\"" ^ name ^ "\"" ^ "\n"
+            ^ "project_dir: " ^ "\"" ^ (input_line result) ^ "/" ^ name ^ "\"" ^ "\n"
+
+            ^ "\n[deps]\n"
+            ^ "src: [" ^ "\"" ^ "main.c" ^ "\"]\n"
+
+            ^ "\n[options]\n"
+            ^ "gdb: " ^ "false\n"
+            ^ "flags: " ^ "[" ^ "\"-Wall\", \"-Wextra\", \"-Werror\"" ^ "]"
+          );
+        | _ -> "Hello, Prefect\n"
     in
     let create (name: string) (file: string) =
       let oc = open_out (name ^ "/" ^ file) in
@@ -77,7 +96,7 @@ module CreateProject = struct
 
     create_files' name files
 
-  let init_git (project_name: string) =
+  let init_git (project_name: string): unit =
     let git_commands project_name =
       try
         Sys.command (
@@ -102,11 +121,23 @@ module CreateProject = struct
     else
       Printf.printf "Failed to create git repository with error: %d" result
 
+  let initial_message (name: string): unit =
+    let message =
+     (
+       "\nCreated a new project named " ^ name ^ "\n"
+       ^ "\ncd " ^ name ^ "\n"
+       ^ "\nprefect build\n"
+       ^ "\nprefect run\n"
+     )
+    in
+
+    print_endline message
+
   let create_project = function
     | [project_name] ->
-      create_structure (project_name);
-      create_files (project_name);
+      create_C_structure project_name;
+      create_C_files project_name;
       init_git project_name;
-      Printf.printf "Created a new project named %s\n" project_name
+      initial_message project_name
     | _ -> print_endline "Nothing to do"
 end
