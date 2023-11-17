@@ -18,10 +18,19 @@ module BuildProject = struct
       failwith "Failed to move to derectory\n"
 
   let compile () =
-    let flags = "-Wall" ^ " " ^ "-Wextra" ^ " " ^ "-Werror" ^ " " in
-    let name = "idea" in
+    let cc = "gcc" ^ " " in (* TODO: Get compiler info *)
+    let debug = "" in (* TODO: Get if debug true *)
+    let flags = "-Wall" ^ " " ^ "-Wextra" ^ " " ^ "-Werror" ^ " " ^ debug ^ " " in
+    let name = "idea" in (* TODO: Get name of the project *)
+    let src = "src/main.c" in (* TODO: Get path to src files *)
+    let output = "-o" ^ " " ^ "./bin/" in
     let compilation_command = (
-      "gcc " ^ flags ^ "src/main.c" ^ " " ^ "-o" ^ " " ^ "./bin/" ^ name
+      cc
+      ^ flags
+      ^ src
+      ^ " "
+      ^ output
+      ^ name
     ) in
     let exit_code = Unix.system compilation_command in
 
@@ -36,6 +45,5 @@ module BuildProject = struct
       find_git_project_root ()
       |> move_root;
       compile ()
-      (* TODO: Build project *)
     | arg :: _ -> Printf.printf "Argument %s is invalid\n" arg
 end
