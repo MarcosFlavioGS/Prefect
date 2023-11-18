@@ -5,15 +5,17 @@ module BuildProject = struct
     input_line result
 
   let compile (path: string) =
-    let cc = "gcc" ^ " " in (* TODO: Get compiler info *)
+    let cc = "gcc" in (* TODO: Get compiler info *)
     let debug = "" in (* TODO: Get if debug true *)
-    let flags = "-Wall" ^ " " ^ "-Wextra" ^ " " ^ "-Werror" ^ " " ^ debug ^ " " in
+    let flags = "-Wall" ^ " " ^ "-Wextra" ^ " " ^ "-Werror" ^ " " ^ debug in
     let name = "idea" in (* TODO: Get name of the project *)
     let src = path ^ "/src/main.c" in (* TODO: Get path to src files *)
     let output = "-o" ^ " " ^ path ^ "/bin/" in
     let compilation_command = (
       cc
+      ^ " "
       ^ flags
+      ^ " "
       ^ src
       ^ " "
       ^ output
