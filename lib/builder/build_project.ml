@@ -6,10 +6,19 @@ module BuildProject = struct
     input_line result
 
   let compile (path: string) =
-    let read_toml (path: string) (_item: string): string =
+    let read_toml (path: string) (item: string): string =
+      let table_key: Types.Table.key = Toml.Min.key item in
       let toml: Parser.result = Toml.Parser.from_filename (path ^ "/Prefect.toml") in
       match toml with
-      | `Ok value -> Toml.Printer.string_of_table value;
+      | `Ok table ->
+        let result = Toml.Types.Table.find_opt (table_key) table in
+
+        (
+          match result with
+        | Some value ->
+          Toml.Printer.string_of_value value
+        | _ -> "Not found"
+        )
       | `Error (message, _) -> failwith message
     in
     let cc = "gcc" in (* TODO: Get compiler info *)
@@ -32,7 +41,7 @@ module BuildProject = struct
 
     match exit_code with
     | Unix.WEXITED 0 ->
-      print_endline (read_toml path "item");
+      print_endline (read_toml path "project");
       print_endline "compilation successful !"
     | _ ->
       print_endline "Compilation failed..."
