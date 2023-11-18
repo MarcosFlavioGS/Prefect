@@ -1,3 +1,5 @@
 (library
 (name builder)
-(libraries unix))
+(libraries
+  unix
+  toml))
