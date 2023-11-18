@@ -69,15 +69,15 @@ module CreateProject = struct
 
           (
             "[project]\n"
-            ^ "name: " ^ "\"" ^ name ^ "\"" ^ "\n"
-            ^ "project_dir: " ^ "\"" ^ (input_line result) ^ "/" ^ name ^ "\"" ^ "\n"
+            ^ "name = " ^ "\"" ^ name ^ "\"" ^ "\n"
+            ^ "project_dir = " ^ "\"" ^ (input_line result) ^ "/" ^ name ^ "\"" ^ "\n"
 
             ^ "\n[deps]\n"
-            ^ "src: [" ^ "\"" ^ "main.c" ^ "\"]\n"
+            ^ "src = [" ^ "\"" ^ "main.c" ^ "\"]\n"
 
             ^ "\n[options]\n"
-            ^ "gdb: " ^ "false\n"
-            ^ "flags: " ^ "[" ^ "\"-Wall\", \"-Wextra\", \"-Werror\"" ^ "]"
+            ^ "gdb = " ^ "false\n"
+            ^ "flags = " ^ "[" ^ "\"-Wall\", \"-Wextra\", \"-Werror\"" ^ "]"
           );
         | _ -> "Hello, Prefect\n"
     in
