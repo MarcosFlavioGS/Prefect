@@ -1,6 +1,7 @@
 (** Module tp create a new project *)
 module CreateProject = struct
   open Unix
+
   let create_C_structure (name: string): unit =
       let directories: string list = [
         "src";
@@ -22,6 +23,7 @@ module CreateProject = struct
           Printf.eprintf "Error creating directory: %s\n" (Unix.error_message e);
           failwith (Unix.error_message e)
       in
+
       let rec build_struct (name: string) = function
         | [] -> print_endline "Done building structure..."
         | [dir] -> create_dir (name ^ "/" ^ dir)
@@ -79,11 +81,14 @@ module CreateProject = struct
           );
         | _ -> "Drink up. The world’s about to end.\n"
     in
+
     let create (name: string) (file: string) =
       let oc = open_out (name ^ "/" ^ file) in
+
       output_string oc (return_string name file);
       close_out oc
     in
+
     let rec create_files' (name: string) = function
       | [] -> print_endline "Empty file information"
       | [file] -> create name file
@@ -112,6 +117,7 @@ module CreateProject = struct
       | Failure msg -> Printf.printf "\nFailed to create git with: %s\n" msg; 1
       | _ -> 0
     in
+
     let result = git_commands project_name in
 
     if result = 0 then

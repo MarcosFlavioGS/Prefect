@@ -24,4 +24,5 @@ let () =
     | _ :: ("generate" | "g") :: args -> Gen.generate args
     | _  -> failwith "Invalid_argument..."
   in
+
   exec_commands (List.length argv) argv;

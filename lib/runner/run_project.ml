@@ -10,6 +10,7 @@ module RunProject = struct
     let read_toml (path: string) (item: string): string =
       let table_key: Types.Table.key = Toml.Min.key item in
       let toml: Parser.result = Toml.Parser.from_filename (path ^ "/Prefect.toml") in
+
       match toml with
       | `Ok table ->
         let result = Toml.Types.Table.find_opt (table_key) table in
@@ -22,12 +23,16 @@ module RunProject = struct
         )
       | `Error (message, _) -> failwith message
     in
+
     let replace (str: string) (reg: string) (sub: string) =
       let regex = regexp reg in
+
       global_replace regex sub str
     in
+
     let run (path: string): int =
       let name = replace (read_toml path "name") "\"+" ""  in
+
       try
         Sys.command (path ^ "/bin/" ^ name)
       with
