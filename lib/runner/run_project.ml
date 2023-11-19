@@ -1,5 +1,7 @@
 (** Run Project module *)
 module RunProject = struct
+  module Build = Builder.Build_project.BuildProject
+
   open Toml
   open Str
   let find_git_project_root (): string =
@@ -45,6 +47,7 @@ module RunProject = struct
 
   let run_project = function
     | [] ->
+      Build.build_project [];
       find_git_project_root ()
       |> runnner
     | arg :: _ -> Printf.printf "Argument %s is invalid\n" arg

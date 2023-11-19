@@ -1,3 +1,6 @@
 (library
 (name runner)
-(libraries unix toml))
+(libraries
+  unix
+  toml
+  builder))
