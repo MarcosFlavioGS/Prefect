@@ -69,9 +69,9 @@ module CreateProject = struct
 
           (
             "name = " ^ "\"" ^ name ^ "\"" ^ "\n"
-            ^ "project_dir = " ^ "\"" ^ (input_line result) ^ "/" ^ name ^ "\"" ^ "\n"
+            ^ "project_dir = " ^ "\"" ^ (input_line result) ^ "/" ^ name ^ "\"" ^ "\n\n"
 
-            ^ "src = [" ^ "\"" ^ "/src/main.c" ^ "\"]\n"
+            ^ "src = [" ^ "\"" ^ "/src/main.c" ^ "\"]\n\n"
 
             ^ "compiler = " ^ "\"gcc\"\n"
             ^ "gdb = " ^ "false\n"
