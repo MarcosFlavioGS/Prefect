@@ -52,10 +52,15 @@ Replace <dependency_type> with the specific dependency you need, such as Makefil
 
 ### Installation
 
-To install Prefect, simply clone the repository and navigate to the project directory. Then, run:
+There is currently no command to install Prefect. Create an alias to Prefect executable by simply clone the repository cd into it then run:
 
 ``` sh
-make
+dune build
+```
+Then just add to your shell config file(.bashrc, .zshrc...) the line:
+
+```sh
+alias prefect="~/path/to/Prefect/_build/default/bin/prefect.exe"
 ```
 
 ## Examples
