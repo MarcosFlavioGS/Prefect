@@ -48,7 +48,7 @@ module CreateProject = struct
             ^ "\n\n"
             ^ "int main(void) {"
             ^ "\n"
-            ^ "    printf(\"Hello, Prefect !\");"
+            ^ "    printf(\"Drink up. The world’s about to end.\");"
             ^ "\n"
             ^ "    return (0);"
             ^ "\n}"
