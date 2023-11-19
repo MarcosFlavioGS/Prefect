@@ -1,2 +1,3 @@
 (library
-(name runner))
+(name runner)
+(libraries unix))
