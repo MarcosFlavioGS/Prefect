@@ -1,6 +1,6 @@
 # Prefect
 
-![Capturar](https://github.com/MarcosFlavioGS/Prefect/assets/95108526/ccb04542-07fd-49e9-8205-cfc04d757767)
+![Capturar](https://github.com/MarcosFlavioGS/Prefect/assets/95108526/b7b38088-34f3-403c-abfd-c071a5ad136a)
 
 A C package manager if you are too lazy for Makefile.
 
