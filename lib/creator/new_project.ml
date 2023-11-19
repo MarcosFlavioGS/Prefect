@@ -80,7 +80,7 @@ module CreateProject = struct
             ^ "gdb = " ^ "false\n"
             ^ "flags = " ^ "[" ^ "\"-Wall\", \"-Wextra\", \"-Werror\"" ^ "]"
           );
-        | _ -> "Hello, Prefect\n"
+        | _ -> "Drink up. The world’s about to end.\n"
     in
     let create (name: string) (file: string) =
       let oc = open_out (name ^ "/" ^ file) in
