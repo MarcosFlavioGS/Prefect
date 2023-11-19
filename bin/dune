@@ -1,7 +1,7 @@
 (executable
  (public_name prefect)
- (name main)
- (modules main)
+ (name prefect)
+ (modules prefect)
  (libraries
    prefect
    creator
