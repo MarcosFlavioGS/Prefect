@@ -76,6 +76,7 @@ module CreateProject = struct
             ^ "src = [" ^ "\"" ^ "main.c" ^ "\"]\n"
 
             ^ "\n[options]\n"
+            ^ "compiler = " ^ "gcc\n"
             ^ "gdb = " ^ "false\n"
             ^ "flags = " ^ "[" ^ "\"-Wall\", \"-Wextra\", \"-Werror\"" ^ "]"
           );
