@@ -68,15 +68,12 @@ module CreateProject = struct
           let result = (Unix.open_process_in "pwd") in
 
           (
-            "[project]\n"
-            ^ "name = " ^ "\"" ^ name ^ "\"" ^ "\n"
+            "name = " ^ "\"" ^ name ^ "\"" ^ "\n"
             ^ "project_dir = " ^ "\"" ^ (input_line result) ^ "/" ^ name ^ "\"" ^ "\n"
 
-            ^ "\n[deps]\n"
-            ^ "src = [" ^ "\"" ^ "main.c" ^ "\"]\n"
+            ^ "src = [" ^ "\"" ^ "/src/main.c" ^ "\"]\n"
 
-            ^ "\n[options]\n"
-            ^ "compiler = " ^ "gcc\n"
+            ^ "compiler = " ^ "\"gcc\"\n"
             ^ "gdb = " ^ "false\n"
             ^ "flags = " ^ "[" ^ "\"-Wall\", \"-Wextra\", \"-Werror\"" ^ "]"
           );

@@ -1,6 +1,7 @@
 (** Build project module_ *)
 module BuildProject = struct
   open Toml
+  open Str
   let find_git_project_root () =
     let result = Unix.open_process_in "git rev-parse --show-toplevel" in
     input_line result
@@ -21,11 +22,28 @@ module BuildProject = struct
         )
       | `Error (message, _) -> failwith message
     in
-    let cc = "gcc" in (* TODO: Get compiler info *)
+    let replace (str: string) (reg: string) (sub: string) =
+      let regex = regexp reg in
+      global_replace regex sub str
+    in
+    let cc = replace (read_toml path "compiler") "\"+" "" in
     let debug = "" in (* TODO: Get if debug true *)
-    let flags = "-Wall" ^ " " ^ "-Wextra" ^ " " ^ "-Werror" ^ " " ^ debug in
-    let name = "idea" in (* TODO: Get name of the project *)
-    let src = path ^ "/src/main.c" in (* TODO: Get path to src files *)
+    let flags = (replace (read_toml path "flags") "\"+" ""
+                 |> (fun x -> replace x "\\[+" "")
+                 |> (fun x -> replace x "\\]+" "")
+                 |> (fun x -> replace x "\\,+" " "))
+                ^ " " ^ debug
+    in
+    let name = replace (read_toml path "name") "\"+" ""  in
+    let src = (replace (read_toml path "src") "\"+" ""
+                 |> (fun x -> replace x "\\[+" "")
+                 |> (fun x -> replace x "\\]+" "")
+                 |> (fun x -> replace x "\\ +" "")
+                 |> (fun x -> replace x "\\,+" " ")
+                 |> (fun x -> split (regexp "\\ +") x)
+                 |> List.map (fun element -> path ^ element)
+                 |> (fun x -> String.concat " " x))
+    in
     let output = "-o" ^ " " ^ path ^ "/bin/" in
     let compilation_command = (
       cc
@@ -37,11 +55,11 @@ module BuildProject = struct
       ^ output
       ^ name
     ) in
+    print_endline compilation_command;
     let exit_code = Unix.system compilation_command in
 
     match exit_code with
     | Unix.WEXITED 0 ->
-      print_endline (read_toml path "project");
       print_endline "compilation successful !"
     | _ ->
       print_endline "Compilation failed..."
