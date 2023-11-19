@@ -52,7 +52,7 @@ Replace <dependency_type> with the specific dependency you need, such as Makefil
 
 ### Installation
 
-There is currently no command to install Prefect. Create an alias to Prefect executable by simply clone the repository cd into it then run:
+There is currently no command to install Prefect. Create an alias to Prefect executable by simply cloning the repository, cd into it then run:
 
 ``` sh
 dune build
