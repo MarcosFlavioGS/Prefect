@@ -11,7 +11,7 @@ module CreateProject = struct
         "bin"
       ]
       in
-      let create_dir (dir_name: string) =
+      let create_dir (dir_name: string): unit =
         let mode = 0o755 in
         try
           Unix.mkdir dir_name mode;
@@ -82,7 +82,7 @@ module CreateProject = struct
         | _ -> "Drink up. The world’s about to end.\n"
     in
 
-    let create (name: string) (file: string) =
+    let create (name: string) (file: string): unit =
       let oc = open_out (name ^ "/" ^ file) in
 
       output_string oc (return_string name file);

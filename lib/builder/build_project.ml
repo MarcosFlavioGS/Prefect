@@ -3,12 +3,12 @@ module BuildProject = struct
   open Toml
   open Str
 
-  let find_git_project_root () =
+  let find_git_project_root (): string =
     let result = Unix.open_process_in "git rev-parse --show-toplevel" in
 
     input_line result
 
-  let compile (path: string) =
+  let compile (path: string): unit =
     let read_toml (path: string) (item: string): string =
       let table_key: Types.Table.key = Toml.Min.key item in
       let toml: Parser.result = Toml.Parser.from_filename (path ^ "/Prefect.toml") in
@@ -26,7 +26,7 @@ module BuildProject = struct
       | `Error (message, _) -> failwith message
     in
 
-    let replace (str: string) (reg: string) (sub: string) =
+    let replace (str: string) (reg: string) (sub: string): string =
       let regex = regexp reg in
       global_replace regex sub str
     in
