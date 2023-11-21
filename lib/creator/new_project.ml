@@ -76,7 +76,6 @@ module CreateProject = struct
             ^ "src = [" ^ "\"" ^ "/src/main.c" ^ "\"]\n\n"
 
             ^ "compiler = " ^ "\"gcc\"\n"
-            ^ "gdb = " ^ "false\n"
             ^ "flags = " ^ "[" ^ "\"-Wall\", \"-Wextra\", \"-Werror\"" ^ "]"
           );
         | _ -> "Drink up. The world’s about to end.\n"

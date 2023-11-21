@@ -28,6 +28,7 @@ module BuildProject = struct
 
     let replace (str: string) (reg: string) (sub: string): string =
       let regex = regexp reg in
+
       global_replace regex sub str
     in
 

@@ -4,6 +4,7 @@ module RunProject = struct
 
   open Toml
   open Str
+
   let find_git_project_root (): string =
     let result = Unix.open_process_in "git rev-parse --show-toplevel" in
     input_line result
