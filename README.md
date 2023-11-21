@@ -28,6 +28,14 @@ Building your C project is a seamless process with Prefect. It compiles your sou
 prefect build
 ```
 
+Prefect can also build to object files.
+
+``` sh
+prefect build -o
+```
+
+It will compile the object files and put them inside your obj/ directory.
+
 ### Run Project
 
 Executing your C project is as simple as running:
