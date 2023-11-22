@@ -71,6 +71,8 @@ Then just add to your shell config file(.bashrc, .zshrc...) the line:
 alias prefect="~/path/to/Prefect/_build/default/bin/prefect.exe"
 ```
 
+The binary is also available on the release page [Release](https://github.com/MarcosFlavioGS/Prefect/releases/tag/v0.1)
+
 ## Examples
 
 ### Creating a new project

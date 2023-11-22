@@ -14,7 +14,7 @@ module BuildProject = struct
 
       match toml with
       | `Ok table ->
-        let result = Toml.Types.Table.find_opt (table_key) table in
+        let result = Toml.Types.Table.find_opt table_key table in
 
         (
           match result with
