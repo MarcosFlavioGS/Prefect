@@ -99,7 +99,7 @@ prefec g makefile
 
 ## License
 
-This project is licensed under the MIT License
+This project is licensed under the [MIT license](https://opensource.org/license/mit/)
 
 ## Acknowledgments
 
