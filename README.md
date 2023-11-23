@@ -60,6 +60,10 @@ Replace <dependency_type> with the specific dependency you need, such as Makefil
 
 ### Installation
 
+### *Release*
+
+The binary is available on the release page [Release](https://github.com/MarcosFlavioGS/Prefect/releases/tag/v0.1)
+
 There is currently no command to install Prefect. Create an alias to Prefect executable by simply cloning the repository, cd into it then run:
 
 ``` sh
@@ -70,8 +74,6 @@ Then just add to your shell config file(.bashrc, .zshrc...) the line:
 ```sh
 alias prefect="~/path/to/Prefect/_build/default/bin/prefect.exe"
 ```
-
-The binary is also available on the release page [Release](https://github.com/MarcosFlavioGS/Prefect/releases/tag/v0.1)
 
 ## Examples
 
