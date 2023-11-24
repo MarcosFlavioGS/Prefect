@@ -1,3 +1,6 @@
 (library
 (name generator)
-(libraries unix git))
+(libraries
+  unix
+  git
+  ctml))
