@@ -62,7 +62,7 @@ Replace <dependency_type> with the specific dependency you need, such as Makefil
 
 ### *Release*
 
-The binary is available on the release page [Release](https://github.com/MarcosFlavioGS/Prefect/releases/tag/v0.1)
+The binary is available on the release page [Release](https://github.com/MarcosFlavioGS/Prefect/releases)
 
 There is currently no command to install Prefect. Create an alias to Prefect executable by simply cloning the repository, cd into it then run:
 
