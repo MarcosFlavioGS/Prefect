@@ -4,7 +4,7 @@ module GenerateStruct = struct
 
     let generate_makefile (path: string) =
     let create_mf (path: string) (file: string): unit =
-      let oc = open_out (path ^ file) in
+      let oc = open_out (path ^ "/" ^ file) in
 
       output_string oc ("Hello");
       close_out oc
