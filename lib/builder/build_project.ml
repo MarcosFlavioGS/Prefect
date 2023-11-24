@@ -1,28 +1,8 @@
 (** Build project module_ *)
 module BuildProject = struct
-  open Toml
+  module Git = Git.Git_utils.GitUtils
+  module Tml = Ctml.Tml.TmlUtils
   open Str
-
-  let find_git_project_root (): string =
-    let result = Unix.open_process_in "git rev-parse --show-toplevel" in
-
-    input_line result
-
-  let read_toml (path: string) (item: string): string =
-      let table_key: Types.Table.key = Toml.Min.key item in
-      let toml: Parser.result = Toml.Parser.from_filename (path ^ "/Prefect.toml") in
-
-      match toml with
-      | `Ok table ->
-        let result = Toml.Types.Table.find_opt table_key table in
-
-        (
-          match result with
-        | Some value ->
-          Toml.Printer.string_of_value value
-        | _ -> "Not found"
-        )
-      | `Error (message, _) -> failwith message
 
   let replace (str: string) (reg: string) (sub: string): string =
     let regex = regexp reg in
@@ -30,14 +10,14 @@ module BuildProject = struct
     global_replace regex sub str
 
   let compile (path: string): unit =
-    let cc = replace (read_toml path "compiler") "\"+" "" in
-    let flags = (replace (read_toml path "flags") "\"+" ""
+    let cc = replace (Tml.read_toml path "compiler") "\"+" "" in
+    let flags = (replace (Tml.read_toml path "flags") "\"+" ""
                  |> (fun x -> replace x "\\[+" "")
                  |> (fun x -> replace x "\\]+" "")
                  |> (fun x -> replace x "\\,+" " "))
     in
-    let name = replace (read_toml path "name") "\"+" ""  in
-    let src = (replace (read_toml path "src") "\"+" ""
+    let name = replace (Tml.read_toml path "name") "\"+" ""  in
+    let src = (replace (Tml.read_toml path "src") "\"+" ""
                  |> (fun x -> replace x "\\[+" "")
                  |> (fun x -> replace x "\\]+" "")
                  |> (fun x -> replace x "\\ +" "")
@@ -67,13 +47,13 @@ module BuildProject = struct
       print_endline "Compilation failed..."
 
   let compile_obj (path: string): unit =
-    let cc = replace (read_toml path "compiler") "\"+" "" in
-    let flags = (replace (read_toml path "flags") "\"+" ""
+    let cc = replace (Tml.read_toml path "compiler") "\"+" "" in
+    let flags = (replace (Tml.read_toml path "flags") "\"+" ""
                  |> (fun x -> replace x "\\[+" "")
                  |> (fun x -> replace x "\\]+" "")
                  |> (fun x -> replace x "\\,+" " "))
     in
-    let src = (replace (read_toml path "src") "\"+" ""
+    let src = (replace (Tml.read_toml path "src") "\"+" ""
                  |> (fun x -> replace x "\\[+" "")
                  |> (fun x -> replace x "\\]+" "")
                  |> (fun x -> replace x "\\ +" "")
@@ -105,10 +85,10 @@ module BuildProject = struct
 
   let build_project  = function
     | [] ->
-      find_git_project_root ()
+      Git.find_git_project_root ()
       |> compile
     | "-c" :: _ ->
-      find_git_project_root ()
+      Git.find_git_project_root ()
       |> compile_obj
     | arg :: _ -> Printf.printf "Argument %s is invalid\n" arg
 end

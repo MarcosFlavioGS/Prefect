@@ -1,5 +1,6 @@
 (** Module tp create a new project *)
 module CreateProject = struct
+  module Git = Git.Git_utils.GitUtils
   open Unix
 
   let create_C_structure (name: string): unit =
@@ -98,32 +99,6 @@ module CreateProject = struct
 
     create_files' name files
 
-  let init_git (project_name: string): unit =
-    let git_commands project_name =
-      try
-        Sys.command (
-          "git init " ^ project_name
-          ^ ";"
-          ^ "cd " ^ project_name
-          ^ ";"
-          ^ "git add ."
-          ^ ";"
-          ^ "git commit -m \"Initial commit\""
-          ^ ";"
-          ^ "cd .."
-        )
-      with
-      | Failure msg -> Printf.printf "\nFailed to create git with: %s\n" msg; 1
-      | _ -> 0
-    in
-
-    let result = git_commands project_name in
-
-    if result = 0 then
-      print_endline "Git repository created !"
-    else
-      Printf.printf "Failed to create git repository with error: %d" result
-
   let initial_message (name: string): unit =
     let message =
      (
@@ -140,7 +115,7 @@ module CreateProject = struct
     | [project_name] ->
       create_C_structure project_name;
       create_C_files project_name;
-      init_git project_name;
+      Git.init_git project_name;
       initial_message project_name
     | _ -> print_endline "Nothing to do"
 end
