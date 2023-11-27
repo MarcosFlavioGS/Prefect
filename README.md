@@ -6,6 +6,8 @@ A C package manager if you are too lazy for Makefile.
 
 ## Overview
 
+![Typing SVG](https://readme-typing-svg.herokuapp.com/?color=2ea043&size=35&center=true&vCenter=true&width=1000&lines=HELLO,+I'm+Marcos+Flávio;I+like+programing;Welcome+!+:%29)
+
 Prefect is a powerful C package and project manager crafted with the elegance of OCaml. It simplifies the entire project lifecycle, from creating a new project with a standardized C project structure to building, running, and generating project dependencies like Makefiles or specific structures for 42 school projects such as MiniShell, FDF, ft_printf, Libft, and more.
 
 ## Features
