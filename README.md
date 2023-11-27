@@ -60,6 +60,8 @@ Replace <dependency_type> with the specific dependency you need, such as Makefil
 
 ## Getting started
 
+![Typing SVG](https://readme-typing-svg.herokuapp.com/?color=D5CCA3&size=35&center=true&vCenter=true&width=1000&lines=$>+prefect+new+project;)
+
 ### Installation
 
 ### *Release*
