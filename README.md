@@ -1,7 +1,8 @@
 # Prefect
-
-![Capturar](https://github.com/MarcosFlavioGS/Prefect/assets/95108526/b7b38088-34f3-403c-abfd-c071a5ad136a)
-
+<div align="center">
+  ![Capturar](https://github.com/MarcosFlavioGS/Prefect/assets/95108526/b7b38088-34f3-403c-abfd-c071a5ad136a)
+<;div>
+  
 A C package manager if you are too lazy for Makefile.
 
 ## Overview
