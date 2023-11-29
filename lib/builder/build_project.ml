@@ -95,11 +95,14 @@ module BuildProject = struct
     | [] ->
       Git.find_git_project_root ()
       |> fun path -> compile path false
-    | "-c" :: _ ->
+    | "-cb" :: _  | "-c" :: "-b" :: _ ->
       let path = Git.find_git_project_root () in
 
       path
       |> compile_obj;
       compile path true
+    | "-c" :: _ ->
+      Git.find_git_project_root ()
+      |> compile_obj
     | arg :: _ -> Printf.printf "Argument %s is invalid\n" arg
 end

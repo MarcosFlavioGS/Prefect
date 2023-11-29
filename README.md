@@ -34,10 +34,22 @@ prefect build
 Prefect can also build to object files.
 
 ``` sh
-prefect build -o
+prefect build -c
 ```
 
-It will compile the object files and put them inside your obj/ directory.
+It will compile the object files and put them inside your obj/ directory. If you want to compile the object files and also build the executable, add an extra option to the build command:
+
+``` sh
+prefect build -cb
+```
+ or:
+ 
+ ```sh
+ prefect build -c -b
+ ```
+
+ This command will both compile the object files into the obj folder and build the executable.
+
 
 ### Run Project
 
