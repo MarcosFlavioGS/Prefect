@@ -1,6 +1,6 @@
 # Prefect
 <div align="center">
-  <img width=100% src="https://github.com/MarcosFlavioGS/Prefect/assets/95108526/17bd9244-3952-459e-9a30-96eea708b240" alt="Capturar">
+  <img width=100% src="https://github.com/MarcosFlavioGS/Prefect/assets/95108526/a261ef3f-9020-4a69-8068-22946b90855f" alt="Capturar">
 </div>
 
 A C package manager if you are too lazy for Makefile.
