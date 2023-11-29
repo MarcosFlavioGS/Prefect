@@ -1,13 +1,10 @@
 (** Run Project module *)
 module RunProject = struct
   module Build = Builder.Build_project.BuildProject
+  module Git = Git.Git_utils.GitUtils
 
   open Toml
   open Str
-
-  let find_git_project_root (): string =
-    let result = Unix.open_process_in "git rev-parse --show-toplevel" in
-    input_line result
 
   let runnner (path: string): unit =
     let read_toml (path: string) (item: string): string =
@@ -49,7 +46,7 @@ module RunProject = struct
   let run_project = function
     | [] ->
       Build.build_project [];
-      find_git_project_root ()
+      Git.find_git_project_root ()
       |> runnner
     | arg :: _ -> Printf.printf "Argument %s is invalid\n" arg
 end

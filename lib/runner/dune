@@ -3,4 +3,5 @@
 (libraries
   unix
   toml
+  git
   builder))
