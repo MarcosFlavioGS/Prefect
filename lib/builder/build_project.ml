@@ -9,7 +9,7 @@ module BuildProject = struct
 
     global_replace regex sub str
 
-  let compile (path: string): unit =
+  let compile (path: string) (obj: bool): unit =
     let cc = replace (Tml.read_toml path "compiler") "\"+" "" in
     let flags = (replace (Tml.read_toml path "flags") "\"+" ""
                  |> (fun x -> replace x "\\[+" "")
@@ -23,7 +23,15 @@ module BuildProject = struct
                  |> (fun x -> replace x "\\ +" "")
                  |> (fun x -> replace x "\\,+" " ")
                  |> (fun x -> split (regexp "\\ +") x)
-                 |> List.map (fun element -> path ^ element)
+                 |> List.map (fun element -> if obj then
+                                 let index = String.rindex element '/' in
+                                 let len = String.length element in
+
+                                 path ^ "/obj/"
+                                 ^ (replace (String.sub element index (len - index)) "\\.c" ".o")
+                               else
+                                 path ^ element
+                             )
                  |> (fun x -> String.concat " " x))
     in
     let output = "-o" ^ " " ^ path ^ "/bin/" in
@@ -79,16 +87,19 @@ module BuildProject = struct
       let result_mv: int = Sys.command ("mv *.o " ^ path ^ "/obj/") in
       if result_mv <> 0 then
         print_endline "Error: Failed to mv object files";
-      print_endline "compilation successful !"
+      print_endline "Object files compilation successful !"
     | _ ->
       print_endline "Compilation failed..."
 
   let build_project  = function
     | [] ->
       Git.find_git_project_root ()
-      |> compile
+      |> fun path -> compile path false
     | "-c" :: _ ->
-      Git.find_git_project_root ()
-      |> compile_obj
+      let path = Git.find_git_project_root () in
+
+      path
+      |> compile_obj;
+      compile path true
     | arg :: _ -> Printf.printf "Argument %s is invalid\n" arg
 end
