@@ -48,8 +48,18 @@ prefect build -cb
  prefect build -c -b
  ```
 
- This command will both compile the object files into the obj folder and build the executable.
+This command will both compile the object files into the obj folder and build the executable.
+ 
+The build option also has optimization options and debug optimization.
 
+``` sh
+prefect build --release
+```
+and
+
+``` sh
+prefect build --debug
+```
 
 ### Run Project
 
