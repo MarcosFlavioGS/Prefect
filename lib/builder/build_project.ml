@@ -98,22 +98,28 @@ module BuildProject = struct
 
     | ["debug"] ->
       Git.find_git_project_root ()
-      |> fun path -> compile ~optimize: "-Og" path false
+      |> fun path -> compile ~optimize: "-Og" path false;
+
+      print_endline "Debug optimizations made !"
 
     | ["release"] ->
       Git.find_git_project_root ()
-      |> fun path -> compile ~optimize: "-O3" path false
+      |> fun path -> compile ~optimize: "-O3" path false;
 
-    | "-cb" :: _  | "-c" :: "-b" :: _ ->
+      print_endline "Optimizations made !"
+
+    | ["-cb"] | ["-c"; "-b"] ->
       let path = Git.find_git_project_root () in
 
       path
       |> compile_obj;
       compile path true
 
-    | "-c" :: _ ->
+    | ["-c"] ->
       Git.find_git_project_root ()
       |> compile_obj
 
-    | arg :: _ -> Printf.printf "Argument %s is invalid\n" arg
+    | [arg] -> Printf.printf "Argument %s is invalid...\n" arg
+
+    | arg :: _ -> Printf.printf "Argument %s is invalid or does not have parameters\n" arg
 end
