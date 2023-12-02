@@ -7,4 +7,5 @@
    creator
    generator
    builder
-   runner))
+   runner
+   help))

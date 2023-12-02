@@ -96,13 +96,13 @@ module BuildProject = struct
       Git.find_git_project_root ()
       |> fun path -> compile path false
 
-    | ["debug"] ->
+    | ["--debug"] ->
       Git.find_git_project_root ()
       |> fun path -> compile ~optimize: "-Og" path false;
 
       print_endline "Debug optimizations made !"
 
-    | ["release"] ->
+    | ["--release"] ->
       Git.find_git_project_root ()
       |> fun path -> compile ~optimize: "-O3" path false;
 
