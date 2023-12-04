@@ -91,16 +91,19 @@ Replace <dependency_type> with the specific dependency you need, such as Makefil
 
 The binary is available on the release page [Release](https://github.com/MarcosFlavioGS/Prefect/releases)
 
-There is currently no command to install Prefect. Create an alias to Prefect executable by simply cloning the repository, cd into it then run:
+### Build and install from source
+
+Clone this repository and run the *make* command to build the project from source and install the binary.
 
 ``` sh
-dune build
-```
-Then just add to your shell config file(.bashrc, .zshrc...) the line:
+git clone https://github.com/MarcosFlavioGS/Prefect.git
 
-```sh
-alias prefect="~/path/to/Prefect/_build/default/bin/prefect.exe"
+cd Prefect
+
+make
 ```
+
+You will need both *Makefile* and *Dune* installed to build the project
 
 ## Examples
 
