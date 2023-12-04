@@ -23,7 +23,7 @@ let () =
     | _ :: ("build" | "b") :: args -> Build.build_project args
     | _ :: ("run" | "r") :: args -> Run.run_project args
     | _ :: ("generate" | "g") :: args -> Gen.generate args
-    | _ :: ("help" | "h") :: _args -> Help.help ()
+    | [ _ ; ("help" | "h")]-> Help.help ()
     | _  -> failwith "Invalid_argument..."
   in
 
