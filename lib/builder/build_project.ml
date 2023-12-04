@@ -9,7 +9,7 @@ module BuildProject = struct
 
     global_replace regex sub str
 
-  let compile ?optimize:(optimize = "") (path: string) (obj: bool): unit =
+  let compile ?optimize:(optimize: string = "") (path: string) (obj: bool): unit =
     let cc = replace (Tml.read_toml path "compiler") "\"+" "" in
     let flags = (replace (Tml.read_toml path "flags") "\"+" ""
                  |> (fun x -> replace x "\\[+" "")
@@ -51,6 +51,7 @@ module BuildProject = struct
     match exit_code with
     | Unix.WEXITED 0 ->
       print_endline "compilation successful !"
+
     | _ ->
       print_endline "Compilation failed..."
 
@@ -88,6 +89,7 @@ module BuildProject = struct
       if result_mv <> 0 then
         print_endline "Error: Failed to mv object files";
       print_endline "Object files compilation successful !"
+
     | _ ->
       print_endline "Compilation failed..."
 

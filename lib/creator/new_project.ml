@@ -20,6 +20,7 @@ module CreateProject = struct
         with
         | Unix.Unix_error (EEXIST, _, _) ->
           Printf.printf "'%s' already exists\n" dir_name
+
         | Unix.Unix_error (e, _, _) ->
           Printf.eprintf "Error creating directory: %s\n" (Unix.error_message e);
           failwith (Unix.error_message e)
@@ -56,6 +57,7 @@ module CreateProject = struct
             ^ "    return (0);"
             ^ "\n}"
           );
+
         | 'h' -> (
             "#ifndef "
             ^ (String.uppercase_ascii name) ^ "_H"
@@ -67,6 +69,7 @@ module CreateProject = struct
             ^ "\n"
             ^ "#endif"
           );
+
         | 'l' ->
           let result = (Unix.open_process_in "pwd") in
 
@@ -79,6 +82,7 @@ module CreateProject = struct
             ^ "compiler = " ^ "\"gcc\"\n"
             ^ "flags = " ^ "[" ^ "\"-Wall\", \"-Wextra\", \"-Werror\"" ^ "]"
           );
+
         | _ -> "Drink up. The world’s about to end.\n"
     in
 
@@ -117,5 +121,6 @@ module CreateProject = struct
       create_C_files project_name;
       Git.init_git project_name;
       initial_message project_name
+
     | _ -> print_endline "Nothing to do"
 end

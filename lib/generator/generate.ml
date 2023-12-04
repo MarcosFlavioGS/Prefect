@@ -65,10 +65,12 @@ module GenerateStruct = struct
     | ["makefile"] ->
       Git.find_git_project_root ()
       |> generate_makefile
+
     | [arg] ->
       (* TODO: Generate project dependencies *)
       Printf.printf (
         "DON'T PANIC !!!\nFunctionality to generate %s not yet implemented, come back in a couple of world ending events."
       ) arg
+
     | _ -> failwith "No option available"
 end

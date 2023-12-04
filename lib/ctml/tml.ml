@@ -14,5 +14,6 @@ module TmlUtils = struct
           Toml.Printer.string_of_value value
         | _ -> "Not found"
       )
+
     | `Error (message, _) -> failwith message
 end

@@ -19,8 +19,10 @@ module RunProject = struct
           match result with
         | Some value ->
           Toml.Printer.string_of_value value
+
         | _ -> "Not found"
         )
+
       | `Error (message, _) -> failwith message
     in
 
@@ -48,5 +50,6 @@ module RunProject = struct
       Build.build_project [];
       Git.find_git_project_root ()
       |> runnner
+
     | arg :: _ -> Printf.printf "Argument %s is invalid\n" arg
 end
