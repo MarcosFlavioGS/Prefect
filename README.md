@@ -91,6 +91,8 @@ Replace <dependency_type> with the specific dependency you need, such as Makefil
 
 The binary is available on the release page [Release](https://github.com/MarcosFlavioGS/Prefect/releases)
 
+You will need GLIBC_2.38 or higher to run the executable.
+
 ### Build and install from source
 
 Clone this repository and run the *make* command to build the project from source and install the binary.
