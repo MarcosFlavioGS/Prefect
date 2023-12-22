@@ -23,15 +23,16 @@ module BuildProject = struct
                  |> (fun x -> replace x "\\ +" "")
                  |> (fun x -> replace x "\\,+" " ")
                  |> (fun x -> split (regexp "\\ +") x)
-                 |> List.map (fun element -> if obj then
-                                 let index = String.rindex element '/' in
-                                 let len = String.length element in
+                 |> List.map (fun element ->
+                     if obj then
+                       let index = String.rindex element '/' in
+                       let len = String.length element in
 
-                                 path ^ "/obj/"
-                                 ^ (replace (String.sub element index (len - index)) "\\.c" ".o")
-                               else
-                                 path ^ element
-                             )
+                       path ^ "/obj/"
+                       ^ (replace (String.sub element index (len - index)) "\\.c" ".o")
+                     else
+                       path ^ element
+                   )
                  |> (fun x -> String.concat " " x))
     in
     let output = "-o" ^ " " ^ path ^ "/bin/" in
