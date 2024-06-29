@@ -3,13 +3,13 @@
   <img width=100% src="https://github.com/MarcosFlavioGS/Prefect/assets/95108526/a261ef3f-9020-4a69-8068-22946b90855f" alt="Capturar">
 </div>
 
-A C package manager if you are too lazy for Makefile.
+A C package manager and build tool if you are too lazy for Makefile.
 
 ## Overview
 
 ![Typing SVG](https://readme-typing-svg.herokuapp.com/?color=D5CCA3&size=35&center=true&vCenter=true&width=1000&lines=Drink+up.;The+world’s+about+to+end.)
 
-Prefect is a powerful C package and project manager crafted with the elegance of OCaml. It simplifies the entire project lifecycle, from creating a new project with a standardized C project structure to building, running, and generating project dependencies like Makefiles or specific structures for 42 school projects such as MiniShell, FDF, ft_printf, Libft, and more.
+Prefect is a powerful C package and build system crafted with the elegance of OCaml. It simplifies the entire project lifecycle, from creating a new project with a standardized C project structure to building, running, and generating project dependencies like Makefiles or specific structures for 42 school projects such as MiniShell, FDF, ft_printf, Libft, and more.
 
 ## Features
 
