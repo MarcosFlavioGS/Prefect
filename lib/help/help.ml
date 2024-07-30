@@ -4,7 +4,7 @@ module HelpModule = struct
       "\tnew | n -> Generates C project structure with initial directories and files."
     in
     let build_option: string =
-      "\tbuild | g -> Build the project binary unsing options contained inside Prefect.toml:\n"
+      "\tbuild | b -> Build the project binary unsing options contained inside Prefect.toml:\n"
         ^ "\t\t-c -> Compiles just the object files: \n"
         ^ "\t\t\t--b -> Generates the binary from the object files.\n"
         ^ "\t\t--release -> Builds optimized binary using the -O3 gcc flag.\n"
