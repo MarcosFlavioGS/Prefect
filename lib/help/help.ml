@@ -6,7 +6,7 @@ module HelpModule = struct
     let build_option: string =
       "\tbuild | b -> Build the project binary unsing options contained inside Prefect.toml:\n"
         ^ "\t\t-c -> Compiles just the object files: \n"
-        ^ "\t\t\t--b -> Generates the binary from the object files.\n"
+        ^ "\t\t\t-b -> Generates the binary from the object files.\n"
         ^ "\t\t--release -> Builds optimized binary using the -O3 gcc flag.\n"
         ^ "\t\t--debug -> Make debug optimizations to the builded binary.\n"
     in
