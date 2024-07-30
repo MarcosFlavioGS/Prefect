@@ -7,13 +7,15 @@ module Help = Help.HelpModule
 
 (* Checks if there are arguments *)
 let check_args (): string list =
-  if Array.length Sys.argv < 2 then
+  let argv: string list = Array.to_list Sys.argv in
+
+  if List.length argv < 2 then
     (
       print_endline "Please provide one or more arguments...";
       exit 1
     )
   else
-    Array.to_list Sys.argv
+    argv
 
 (* Entrypoint *)
 let () =
