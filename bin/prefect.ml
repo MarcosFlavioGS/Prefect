@@ -26,6 +26,7 @@ let () =
     | _ :: ("run" | "r") :: args -> Run.run_project args
     | _ :: ("generate" | "g") :: args -> Gen.generate args
     | [ _ ; ("help" | "h")]-> Help.help ()
+    (* TODO: prefect rename - renames the project name *)
     | _  -> failwith "Invalid_argument..."
   in
 
