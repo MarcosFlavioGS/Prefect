@@ -3,5 +3,5 @@ all: build
 	@sudo cp _build/default/bin/prefect /usr/bin/
 
 build:
-	@dune build
+	@opam exec -- dune build
 	@mv _build/default/bin/prefect.exe _build/default/bin/prefect
