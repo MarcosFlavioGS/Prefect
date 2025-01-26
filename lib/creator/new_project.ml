@@ -122,5 +122,9 @@ module CreateProject = struct
       Git.init_git project_name;
       initial_message project_name
 
+    | [_project_name; "--c++"] ->
+      print_endline "Creating c++ project not yet implemented."
+      (* TODO: create functionalities for C++ projects *)
+
     | _ -> print_endline "Nothing to do"
 end
