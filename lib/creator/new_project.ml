@@ -123,7 +123,7 @@ module CreateProject = struct
       initial_message project_name
 
     | [_project_name; "--c++"] ->
-      print_endline "Creating c++ project not yet implemented."
+      print_endline "Creating c++ project not yet implemented, come back in a couple of world ending events."
       (* TODO: create functionalities for C++ projects *)
 
     | _ -> print_endline "Nothing to do"

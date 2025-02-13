@@ -68,12 +68,12 @@ module GenerateStruct = struct
 
     | ["raylib"] ->
       (* TODO: Create Raylib project deps *)
-      print_endline "Generating Raylib deps is not yet implemented."
+      print_endline "Generating Raylib deps is not yet implemented, come back in a couple of world ending events."
 
     | [arg] ->
       (* TODO: Generate project dependencies *)
       Printf.printf (
-        "DON'T PANIC !!!\nFunctionality to generate %s not yet implemented, come back in a couple of world ending events."
+        "DON'T PANIC !!!\nFunctionality to generate %s not yet implemented."
       ) arg
 
     | _ -> failwith "No option available"
