@@ -66,6 +66,10 @@ module GenerateStruct = struct
       Git.find_git_project_root ()
       |> generate_makefile
 
+    | ["raylib"] ->
+      (* TODO: Create Raylib project deps *)
+      print_endline "Generating Raylib deps is not yet implemented."
+
     | [arg] ->
       (* TODO: Generate project dependencies *)
       Printf.printf (

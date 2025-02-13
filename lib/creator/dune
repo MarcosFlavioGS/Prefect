@@ -2,5 +2,4 @@
 (name creator)
 (libraries
   unix
-  yojson
   git))
