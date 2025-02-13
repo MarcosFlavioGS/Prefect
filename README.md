@@ -1,7 +1,6 @@
 # Prefect
-<div align="center">
+
   ![logo-no-background](https://github.com/user-attachments/assets/9b716f21-c368-4a4c-8e2f-ef6c414f63e6)
-</div>
 
 A C package manager and build tool if you are too lazy for Makefile.
 
