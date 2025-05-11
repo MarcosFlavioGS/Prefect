@@ -11,12 +11,13 @@
 
 (maintainers "Marcos Flavio")
 
-(license LICENSE)
+(license MIT)
 
 (documentation https://url/to/documentation)
 
 (package
  (name prefect)
+ (version 0.5.0)
  (synopsis "A C package manager and build system")
  (description "This a new C package manager and build system for C without having to use makefile")
  (depends ocaml dune)
