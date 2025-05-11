@@ -2,6 +2,6 @@
 (name generator)
 (libraries
   unix
+  toml
   git
-  sexpr
-  ctml))
+  sexpr))
