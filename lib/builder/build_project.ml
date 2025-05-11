@@ -1,7 +1,7 @@
 (** Build project module_ *)
 module BuildProject = struct
   module Git = Git.Git_utils.GitUtils
-  module Tml = Ctml.Tml.TmlUtils
+  module Sexpr = Sexpr.Sexp_config.SexpConfig
   open Str
 
   let replace (str: string) (reg: string) (sub: string): string =
@@ -10,14 +10,15 @@ module BuildProject = struct
     global_replace regex sub str
 
   let compile ?optimize:(optimize: string = "") (path: string) (obj: bool): unit =
-    let cc = replace (Tml.read_toml path "compiler") "\"+" "" in
-    let flags = (replace (Tml.read_toml path "flags") "\"+" ""
+    let config_path = path ^ "/Prefect.sexp" in
+    let cc = replace (Sexpr.read_config ~path:config_path ~item:"compiler") "\"+" "" in
+    let flags = (replace (Sexpr.read_config ~path:config_path ~item:"flags") "\"+" ""
                  |> (fun x -> replace x "\\[+" "")
                  |> (fun x -> replace x "\\]+" "")
                  |> (fun x -> replace x "\\,+" " ")) ^ " " ^ optimize
     in
-    let name = replace (Tml.read_toml path "name") "\"+" ""  in
-    let src = (replace (Tml.read_toml path "src") "\"+" ""
+    let name = replace (Sexpr.read_config ~path:config_path ~item:"name") "\"+" ""  in
+    let src = (replace (Sexpr.read_config ~path:config_path ~item:"src") "\"+" ""
                  |> (fun x -> replace x "\\[+" "")
                  |> (fun x -> replace x "\\]+" "")
                  |> (fun x -> replace x "\\ +" "")
@@ -57,13 +58,14 @@ module BuildProject = struct
       print_endline "Compilation failed..."
 
   let compile_obj (path: string): unit =
-    let cc = replace (Tml.read_toml path "compiler") "\"+" "" in
-    let flags = (replace (Tml.read_toml path "flags") "\"+" ""
+    let config_path = path ^ "/Prefect.sexp" in
+    let cc = replace (Sexpr.read_config ~path:config_path ~item:"compiler") "\"+" "" in
+    let flags = (replace (Sexpr.read_config ~path:config_path ~item:"flags") "\"+" ""
                  |> (fun x -> replace x "\\[+" "")
                  |> (fun x -> replace x "\\]+" "")
                  |> (fun x -> replace x "\\,+" " "))
     in
-    let src = (replace (Tml.read_toml path "src") "\"+" ""
+    let src = (replace (Sexpr.read_config ~path:config_path ~item:"src") "\"+" ""
                  |> (fun x -> replace x "\\[+" "")
                  |> (fun x -> replace x "\\]+" "")
                  |> (fun x -> replace x "\\ +" "")

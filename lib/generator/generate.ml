@@ -1,7 +1,7 @@
 (** Generate Module *)
 module GenerateStruct = struct
   module Git = Git.Git_utils.GitUtils
-  module Tml = Ctml.Tml.TmlUtils
+  module Sexpr = Sexpr.Sexp_config.SexpConfig
   open Str
 
   let generate_makefile (path: string) =
@@ -20,13 +20,15 @@ module GenerateStruct = struct
           str
       in
 
-      let name = replace (Tml.read_toml path "name") "\"+" "" in
-      let cc = replace (Tml.read_toml path "compiler") "\"+" "" in
-      let flags = (replace (Tml.read_toml path "flags") "\"+" ""
+      let config_path = path ^ "/Prefect.sexp" in
+
+      let name = replace (Sexpr.read_config ~path:config_path ~item:"name") "\"+" "" in
+      let cc = replace (Sexpr.read_config ~path:config_path ~item:"compiler") "\"+" "" in
+      let flags = (replace (Sexpr.read_config ~path:config_path ~item:"flags") "\"+" ""
                    |> (fun x -> replace x "\\[+" "")
                    |> (fun x -> replace x "\\]+" "")
                    |> (fun x -> replace x "\\,+" " ")) in
-      let src = (replace (Tml.read_toml path "src") "\"+" ""
+      let src = (replace (Sexpr.read_config ~path:config_path ~item:"src") "\"+" ""
                  |> (fun x -> replace x "\\[+" "")
                  |> (fun x -> replace x "\\]+" "")
                  |> (fun x -> replace x "\\ +" "")

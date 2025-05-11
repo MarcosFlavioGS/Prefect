@@ -71,19 +71,6 @@ module CreateProject = struct
             ^ "#endif"
           );
 
-        | 'l' ->
-          let result = (Unix.open_process_in "pwd") in
-
-          (
-            "name = " ^ "\"" ^ name ^ "\"" ^ "\n"
-            ^ "project_dir = " ^ "\"" ^ (input_line result) ^ "/" ^ name ^ "\"" ^ "\n\n"
-
-            ^ "src = [" ^ "\"" ^ "/src/main.c" ^ "\"]\n\n"
-
-            ^ "compiler = " ^ "\"gcc\"\n"
-            ^ "flags = " ^ "[" ^ "\"-Wall\", \"-Wextra\", \"-Werror\"" ^ "]"
-          );
-
         | _ -> "Drink up. The world’s about to end.\n"
     in
 
@@ -91,7 +78,7 @@ module CreateProject = struct
       let cwd = Sys.getcwd () in
 
       match String.get file (String.length file - 1) with
-      | 'p' -> Sexpr.write_config name file cwd
+      | 'p' -> Sexpr.write_config ~name ~file ~cwd
 
       | _ -> (
           let oc = open_out (name ^ "/" ^ file) in

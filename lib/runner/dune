@@ -2,6 +2,7 @@
 (name runner)
 (libraries
   unix
+  sexpr
   toml
   git
   builder))
