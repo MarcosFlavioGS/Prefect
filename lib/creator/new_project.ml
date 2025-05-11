@@ -2,6 +2,7 @@
 module CreateProject = struct
   module Git = Git.Git_utils.GitUtils
   open Unix
+  module Sexpr = Sexpr.Sexp_config.SexpConfig
 
   let create_C_structure (name: string): unit =
       let directories: string list = [
@@ -41,7 +42,7 @@ module CreateProject = struct
     let files: string list = [
       "include/" ^ name ^ ".h";
       "src/main.c";
-      "Prefect.toml"
+      "Prefect.sexp"
     ]
     in
     let return_string (name: string) (file: string): string =
@@ -87,10 +88,17 @@ module CreateProject = struct
     in
 
     let create (name: string) (file: string): unit =
-      let oc = open_out (name ^ "/" ^ file) in
+      let cwd = Sys.getcwd () in
 
-      output_string oc (return_string name file);
-      close_out oc
+      match String.get file (String.length file - 1) with
+      | 'p' -> Sexpr.write_config name file cwd
+
+      | _ -> (
+          let oc = open_out (name ^ "/" ^ file) in
+          output_string oc (return_string name file);
+          close_out oc
+      )
+
     in
 
     let rec create_files' (name: string) = function
