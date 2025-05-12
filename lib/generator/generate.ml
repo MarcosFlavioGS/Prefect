@@ -24,15 +24,8 @@ module GenerateStruct = struct
 
       let name = replace (Sexpr.read_config ~path:config_path ~item:"name") "\"+" "" in
       let cc = replace (Sexpr.read_config ~path:config_path ~item:"compiler") "\"+" "" in
-      let flags = (replace (Sexpr.read_config ~path:config_path ~item:"flags") "\"+" ""
-                   |> (fun x -> replace x "\\[+" "")
-                   |> (fun x -> replace x "\\]+" "")
-                   |> (fun x -> replace x "\\,+" " ")) in
+      let flags = Sexpr.read_config ~path:config_path ~item:"flags" in
       let src = (replace (Sexpr.read_config ~path:config_path ~item:"src") "\"+" ""
-                 |> (fun x -> replace x "\\[+" "")
-                 |> (fun x -> replace x "\\]+" "")
-                 |> (fun x -> replace x "\\ +" "")
-                 |> (fun x -> replace x "\\,+" " ")
                  |> (fun x -> split (regexp "\\ +") x)
                  |> List.map (fun element -> (remove_at element) ^ " \\\n\t\t")
                  |> (fun x -> String.concat " " x))(* TODO: Remove last \ char *)

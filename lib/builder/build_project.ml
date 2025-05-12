@@ -12,17 +12,9 @@ module BuildProject = struct
   let compile ?optimize:(optimize: string = "") (path: string) (obj: bool): unit =
     let config_path = path ^ "/Prefect.sexp" in
     let cc = replace (Sexpr.read_config ~path:config_path ~item:"compiler") "\"+" "" in
-    let flags = (replace (Sexpr.read_config ~path:config_path ~item:"flags") "\"+" ""
-                 |> (fun x -> replace x "\\[+" "")
-                 |> (fun x -> replace x "\\]+" "")
-                 |> (fun x -> replace x "\\,+" " ")) ^ " " ^ optimize
-    in
+    let flags = Sexpr.read_config ~path:config_path ~item:"flags" ^ " " ^ optimize in
     let name = replace (Sexpr.read_config ~path:config_path ~item:"name") "\"+" ""  in
     let src = (replace (Sexpr.read_config ~path:config_path ~item:"src") "\"+" ""
-                 |> (fun x -> replace x "\\[+" "")
-                 |> (fun x -> replace x "\\]+" "")
-                 |> (fun x -> replace x "\\ +" "")
-                 |> (fun x -> replace x "\\,+" " ")
                  |> (fun x -> split (regexp "\\ +") x)
                  |> List.map (fun element ->
                      if obj then
@@ -60,16 +52,8 @@ module BuildProject = struct
   let compile_obj (path: string): unit =
     let config_path = path ^ "/Prefect.sexp" in
     let cc = replace (Sexpr.read_config ~path:config_path ~item:"compiler") "\"+" "" in
-    let flags = (replace (Sexpr.read_config ~path:config_path ~item:"flags") "\"+" ""
-                 |> (fun x -> replace x "\\[+" "")
-                 |> (fun x -> replace x "\\]+" "")
-                 |> (fun x -> replace x "\\,+" " "))
-    in
+    let flags = Sexpr.read_config ~path:config_path ~item:"flags" in
     let src = (replace (Sexpr.read_config ~path:config_path ~item:"src") "\"+" ""
-                 |> (fun x -> replace x "\\[+" "")
-                 |> (fun x -> replace x "\\]+" "")
-                 |> (fun x -> replace x "\\ +" "")
-                 |> (fun x -> replace x "\\,+" " ")
                  |> (fun x -> split (regexp "\\ +") x)
                  |> List.map (fun element -> path ^ element)
                  |> (fun x -> String.concat " " x))
