@@ -121,12 +121,6 @@ Prefect uses S-expressions for configuration. A basic configuration looks like:
 )
 ```
 
-### Custom Templates
-Create custom project templates by modifying the configuration:
-```bash
-prefect generate template my_template
-```
-
 ### Build Options
 - `--release`: Enable optimizations
 - `--debug`: Include debug information
