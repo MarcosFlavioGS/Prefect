@@ -1,141 +1,161 @@
 # Prefect
 
-  ![logo-no-background](https://github.com/user-attachments/assets/9b716f21-c368-4a4c-8e2f-ef6c414f63e6)
+![logo-no-background](https://github.com/user-attachments/assets/9b716f21-c368-4a4c-8e2f-ef6c414f63e6)
 
-A C package manager and build tool if you are too lazy for Makefile.
+A modern C package manager and build tool that simplifies your development workflow.
 
 ## Overview
 
-![Typing SVG](https://readme-typing-svg.herokuapp.com/?color=D5CCA3&size=35&center=true&vCenter=true&width=1000&lines=Drink+up.;The+world’s+about+to+end.)
+![Typing SVG](https://readme-typing-svg.herokuapp.com/?color=D5CCA3&size=35&center=true&vCenter=true&width=1000&lines=Drink+up.;The+world's+about+to+end.)
 
-Prefect is a powerful C package and build system crafted with the elegance of OCaml. It simplifies the entire project lifecycle, from creating a new project with a standardized C project structure to building, running, and generating project dependencies like Makefiles or specific structures for 42 school projects such as MiniShell, FDF, ft_printf, Libft, and more.
+Prefect is a powerful C package and build system crafted with the elegance of OCaml. It streamlines your entire development workflow, from project initialization to deployment, with a focus on simplicity and efficiency.
 
 ## Features
 
-### Create Project
+### 🚀 Project Management
+- Create standardized C project structures
+- Automatic Git repository initialization
+- Configurable project templates
+- Dependency management
 
-Prefect makes project initiation a breeze. It sets up a comprehensive C project structure with directories like src, obj, include, test, and bin. To create a new project, use the following command:
+### 🛠️ Build System
+- Smart compilation with automatic dependency tracking
+- Multiple build modes (debug, release)
+- Object file compilation support
+- Customizable compiler flags
 
-``` sh
-prefect new <project_name>
-```
+### 📦 Package Management
+- Easy dependency installation
+- Version management
+- Project-specific configurations
+- Support for external libraries
 
-This command not only creates the necessary directories but also initializes a Git repository for version control.
+### 🎓 Educational Support
+- Specialized templates for 42 school projects
+- Built-in support for common project structures
+- Standardized build configurations
+- Easy project submission preparation
 
-### Build Project
-
-Building your C project is a seamless process with Prefect. It compiles your source code, taking care of compiler flags and other configurations. To build your project, run:
-
-``` sh
-prefect build
-```
-
-Prefect can also build to object files.
-
-``` sh
-prefect build -c
-```
-
-It will compile the object files and put them inside your obj/ directory. If you want to compile the object files and also build the executable, add an extra option to the build command:
-
-``` sh
-prefect build -cb
-```
- or:
- 
- ```sh
- prefect build -c -b
- ```
-
-This command will both compile the object files into the obj folder and build the executable.
- 
-The build option also has optimization options and debug optimization.
-
-``` sh
-prefect build --release
-```
-and
-
-``` sh
-prefect build --debug
-```
-
-### Run Project
-
-Executing your C project is as simple as running:
-
-``` sh
-prefect run
-```
-
-This command ensures that your project is compiled and then executes the compiled binary.
-
-### Generate Project Dependencies
-
-Need project-specific configurations like Makefiles or 42 school project structures? Prefect has you covered. To generate project dependencies, use:
-
-``` sh
-prefect generate <dependencie_type>
-```
-
-Replace <dependency_type> with the specific dependency you need, such as Makefile.
-
-## Getting started
-
-![Typing SVG](https://readme-typing-svg.herokuapp.com/?color=D5CCA3&size=35&center=true&vCenter=true&width=1000&lines=$>+prefect+new+project;)
+## Quick Start
 
 ### Installation
 
-### *Release*
+#### From Release
+1. Download the latest release from the [Releases page](https://github.com/MarcosFlavioGS/Prefect/releases)
+2. Ensure you have GLIBC 2.38 or higher
+3. Make the binary executable: `chmod +x prefect`
+4. Move to your PATH: `sudo mv prefect /usr/local/bin/`
 
-The binary is available on the release page [Release](https://github.com/MarcosFlavioGS/Prefect/releases)
-
-You will need GLIBC_2.38 or higher to run the executable.
-
-### Build and install from source
-
-Clone this repository and run the *make* command to build the project from source and install the binary.
-
-``` sh
+#### From Source
+```bash
+# Clone the repository
 git clone https://github.com/MarcosFlavioGS/Prefect.git
 
+# Navigate to the project directory
 cd Prefect
 
+# Build and install
 make
 ```
 
-You will need both *Makefile* and *Dune* installed to build the project
+### Basic Usage
 
-## Examples
-
-### Creating a new project
-
-``` sh
-prefect new my_c_project
+#### Create a New Project
+```bash
+prefect new my_project
+```
+This creates a new C project with the following structure:
+```
+my_project/
+├── src/
+│   └── main.c
+├── include/
+├── obj/
+├── test/
+└── bin/
 ```
 
-This command creates a new C project named "my_c_project" with the standard project structure.
+#### Build Your Project
+```bash
+# Standard build
+prefect build
 
-### Generating a Makefile
+# Build with optimizations
+prefect build --release
 
-``` sh
+# Build with debug information
+prefect build --debug
+
+# Compile to object files
+prefect build -c
+
+# Compile objects and build executable
+prefect build -cb
+```
+
+#### Run Your Project
+```bash
+prefect run
+```
+
+#### Generate Project Dependencies
+```bash
+# Generate a Makefile
 prefect generate makefile
+
+# Short form
+prefect g makefile
 ```
 
-the generate command, as well as all other commands, can be used in it's short form:
+## Advanced Usage
 
-``` sh
-prefec g makefile
+### Project Configuration
+Prefect uses S-expressions for configuration. A basic configuration looks like:
+```lisp
+(
+  (name "project_name")
+  (project_dir "/path/to/project")
+  (src ("/src/main.c"))
+  (compiler "gcc")
+  (flags ("-Wall" "-Wextra" "-Werror"))
+)
 ```
+
+### Custom Templates
+Create custom project templates by modifying the configuration:
+```bash
+prefect generate template my_template
+```
+
+### Build Options
+- `--release`: Enable optimizations
+- `--debug`: Include debug information
+- `-c`: Compile to object files
+- `-b`: Build executable
+- `-cb`: Compile objects and build
+
+## Requirements
+
+- OCaml 4.14.0 or higher
+- OPAM 2.1.0 or higher
+- Dune 3.0.0 or higher
+- GLIBC 2.38 or higher
+
+## Contributing
+
+We welcome contributions! Please see our [Contributing Guidelines](CONTRIBUTING.md) for details.
 
 ## License
 
-This project is licensed under the [MIT license](https://opensource.org/license/mit/)
+This project is licensed under the [MIT License](https://opensource.org/license/mit/).
 
 ## Acknowledgments
 
-We would like to express our gratitude to the OCaml and C communities for their continuous support and inspiration.
+Special thanks to:
+- The OCaml community for their excellent tools and support
+- The C programming community for their continuous innovation
+- All contributors who have helped shape Prefect
 
-###
+---
 
-*Thank you for choosing Prefect for your C projects! Happy coding!* 🚀
+*Thank you for choosing Prefect! Happy coding!* 🚀
