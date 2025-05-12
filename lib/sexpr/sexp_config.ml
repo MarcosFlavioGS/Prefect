@@ -12,13 +12,23 @@ module SexpConfig = struct
       List [ Atom "flags"      ; List [ Atom "-Wall"; Atom "-Wextra"; Atom "-Werror" ] ];
     ]
 
+  let format_sexp sexp =
+    let rec format indent = function
+      | Atom s -> s
+      | List [] -> "()"
+      | List [x] -> "(" ^ format 0 x ^ ")"
+      | List (x :: xs) ->
+        let indent_str = String.make (indent * 2) ' ' in
+        let first = "(" ^ format (indent + 1) x in
+        let rest = List.map xs ~f:(fun x -> indent_str ^ format (indent + 1) x) in
+        first ^ "\n" ^ String.concat ~sep:"\n" rest ^ ")"
+    in
+    format 0 sexp
 
   let write_config ~(name : string) ~(file : string) ~(cwd: string) : unit =
     let sexp = default_config name cwd in
-    (* atomically write a human-readable sexp *)
-    Sexp.save_hum (cwd ^ "/" ^ name ^ "/" ^ file) sexp
-    (* returns () on success, or raises on I/O error *)
-
+    let formatted = format_sexp sexp in
+    Out_channel.write_all (cwd ^ "/" ^ name ^ "/" ^ file) ~data:formatted
 
   let read_config ~(path : string) ~(item : string) : string =
     let sexp = load_sexp path in

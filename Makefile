@@ -74,7 +74,7 @@ install:
 	@if [ -f $(TARGET) ]; then \
 		echo "Backing up existing installation..."; \
 		mkdir -p $(BACKUP_DIR); \
-		cp $(TARGET) $(BACKUP_DIR)/prefect.backup; \
+		sudo cp $(TARGET) $(BACKUP_DIR)/prefect.backup; \
 	fi
 	@sudo cp _build/default/bin/prefect $(TARGET)
 	@echo "Installation complete."
