@@ -8,4 +8,5 @@
    generator
    builder
    runner
-   help))
+   help
+   version))

@@ -4,6 +4,7 @@ module Gen = Generator.Generate.GenerateStruct
 module Build = Builder.Build_project.BuildProject
 module Run = Runner.Run_project.RunProject
 module Help = Help.HelpModule
+module Version = Version.Version
 
 (* Checks if there are arguments *)
 let check_args (): string list =
@@ -26,6 +27,7 @@ let () =
     | _ :: ("run" | "r") :: args -> Run.run_project args
     | _ :: ("generate" | "g") :: args -> Gen.generate args
     | [ _ ; ("help" | "h")]-> Help.help ()
+    | [ _ ; ("version" | "-v" | "--version") ] -> Version.get_version ()
     (* TODO: prefect rename - renames the project name *)
     | _  -> failwith "Invalid_argument..."
   in

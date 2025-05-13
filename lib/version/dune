@@ -1,0 +1,4 @@
+(library
+ (name version)
+ (libraries
+   dune-build-info))
