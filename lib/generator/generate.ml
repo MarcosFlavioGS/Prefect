@@ -70,6 +70,8 @@ module GenerateStruct = struct
       Printf.printf (
         "DON'T PANIC !!!\nFunctionality to generate %s not yet implemented."
       ) arg
+    | [] ->
+      print_endline "Please provide an argument for the generate command."
 
     | _ -> failwith "No option available"
 end
