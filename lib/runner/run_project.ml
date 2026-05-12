@@ -34,7 +34,7 @@ module RunProject = struct
       Git.find_git_project_root ()
       |> runner
 
-    | [arg] when String.ends_with ~suffix:(".cml") arg ->
+    | [arg] ->
       Build.build_project [];
       Git.find_git_project_root ()
       |> runner ~args:arg
