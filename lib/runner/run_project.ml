@@ -6,7 +6,7 @@ module RunProject = struct
 
   open Str
 
-  let runnner (path: string): unit =
+  let runner ?args:(args: string = "") (path: string): unit =
     let config_path = path ^ "/Prefect.sexp" in
 
     let replace (str: string) (reg: string) (sub: string) =
@@ -19,7 +19,7 @@ module RunProject = struct
       let name = replace (Sexpr.read_config ~path:config_path ~item:"name") "\"+" ""  in
 
       try
-        Sys.command (path ^ "/bin/" ^ name)
+        Sys.command (path ^ "/bin/" ^ name  ^ " " ^ args)
       with
       |Failure msg -> Printf.printf "Error: %s" msg; 1
       | _ -> 0
@@ -32,7 +32,12 @@ module RunProject = struct
     | [] ->
       Build.build_project [];
       Git.find_git_project_root ()
-      |> runnner
+      |> runner
+
+    | [arg] when String.ends_with ~suffix:(".cml") arg ->
+      Build.build_project [];
+      Git.find_git_project_root ()
+      |> runner ~args:arg
 
     | arg :: _ -> Printf.printf "Argument %s is invalid\n" arg
 end
